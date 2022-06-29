@@ -1,9 +1,9 @@
 {
-  "name": "Which TD: Instantly know which account you are logged in",
+  "name": "Which TD+: Instantly know which account you are logged in",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "",
-  "homepage_url": "https://github.com/kiyoto",
+  "homepage_url": "https://github.com/satour",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -11,14 +11,15 @@
   },
   "page_action": {
     "default_icon": "icons/icon19.png",
-    "default_title": "Which TD"
+    "default_title": "Which TD+"
   },
   "content_scripts": [
     {
       "matches": [
         "https://console.treasuredata.com/*",
         "https://console.eu01.treasuredata.com/*",
-        "https://console.treasuredata.co.jp/*"
+        "https://console.treasuredata.co.jp/*",
+        "https://console.ap02.treasuredata.com/*"
       ],
       "js": [
         "src/inject/inject.js"

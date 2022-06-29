@@ -1,5 +1,5 @@
-chrome.extension.sendMessage({}, function(response) {
-    var readyStateCheckInterval = setInterval(function() {
+chrome.extension.sendMessage({}, function (response) {
+    var readyStateCheckInterval = setInterval(function () {
         if (document.readyState === "complete") {
             clearInterval(readyStateCheckInterval);
 
@@ -25,35 +25,65 @@ chrome.extension.sendMessage({}, function(response) {
                     xhr.send(obj.body);
                 });
             };
-            
-            let render = (accountId, accountName) => {
+
+            let render = (accountId, accountName, ownerName) => {
                 let el = document.createElement('div');
-                el.innerText = 'Account: '+accountId+ ' Name: ' + accountName;
+                let region = (function () {
+                    switch (document.location.hostname) {
+                        case 'console.treasuredata.com':
+                            return 'aws:';
+                        case 'console.eu01.treasuredata.com':
+                            return 'aws-eu:';
+                        case 'console.treasuredata.co.jp':
+                            return 'aws-tokyo:';
+                        case 'console.ap02.treasuredata.com':
+                            return 'aws-seoul:';
+                        default:
+                            return 'unknown:';
+                    };
+                })();
+                el.onclick = function (event) {
+                    if (event.target.style.zIndex == 11) {
+                        event.target.style.zIndex = 9;
+                    } else {
+                        event.target.style.zIndex = 11;
+                    };
+                };
+                el.innerText = '　' + region + accountId +
+                    '｜' + accountName + '　';
                 el.style.display = 'flex';
                 el.style.alignItems = 'center';
+                el.style.textAlign = 'right';
                 el.style.padding = '3px';
                 el.style.backgroundColor = 'rgb(0,193,222)';
                 el.style.color = '#EEEEEE';
                 el.style.position = 'fixed';
-                el.style.zIndex = 9999;
+                el.style.opacity = 0.8;
+                el.style.zIndex = 11;
                 el.style.bottom = 0; // sticky to the bottom left;
                 el.style.borderRadius = '0 5px 5px 0';
                 document.body.appendChild(el);
             };
-            
-            request({"url":"/v4/users/current"}).then(data => {
+
+            request({
+                "url": "/v4/users/current"
+            }).then(data => {
                 let response = JSON.parse(data);
                 let email = response.email;
                 let regex = /(?<=\+)[A-z]*(?=@)/gm;
                 let accountName = email.match(regex)[0];
-                request({"url":"/v4/account"}).then(data => {
+                request({
+                    "url": "/v4/account"
+                }).then(data => {
                     let response = JSON.parse(data);
                     let accountId = response.id;
-                    render(accountId, accountName);
+                    let ownerName = response.owner.name;
+                    console.log(response);
+                    render(accountId, accountName, ownerName);
                 })
             });
-        
+
         }
     }, 10);
-    
+
 });
