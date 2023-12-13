@@ -38,6 +38,10 @@ chrome.extension.sendMessage({}, function (response) {
                             return 'aws-tokyo:';
                         case 'console.ap02.treasuredata.com':
                             return 'aws-seoul:';
+                        case 'console-next.treasuredata.com':
+                            return 'aws:';
+                        case 'console-next.treasuredata.co.jp':
+                            return 'aws-tokyo:';
                         default:
                             return 'unknown:';
                     };
