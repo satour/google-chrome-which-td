@@ -33,13 +33,17 @@ chrome.extension.sendMessage({}, function (response) {
                         case 'console.treasuredata.com':
                             return 'aws:';
                         case 'console.eu01.treasuredata.com':
-                            return 'aws-eu:';
+                            return 'eu01:';
                         case 'console.treasuredata.co.jp':
                             return 'aws-tokyo:';
                         case 'console.ap02.treasuredata.com':
-                            return 'aws-seoul:';
+                            return 'ap02:';
                         case 'console-next.treasuredata.com':
                             return 'aws:';
+                        case 'console-next.eu01.treasuredata.com':
+                            return 'eu01:';
+                        case 'console-next.ap02.treasuredata.com':
+                            return 'ap02:';
                         case 'console-next.treasuredata.co.jp':
                             return 'aws-tokyo:';
                         default:

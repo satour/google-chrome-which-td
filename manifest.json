@@ -21,6 +21,8 @@
         "https://console.treasuredata.co.jp/*",
         "https://console.ap02.treasuredata.com/*",
         "https://console-next.treasuredata.com/*",
+        "https://console-next.eu01.treasuredata.com/*",
+        "https://console-next.ap02.treasuredata.com/*",
         "https://console-next.treasuredata.co.jp/*"
       ],
       "js": [
