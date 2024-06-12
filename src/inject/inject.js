@@ -62,7 +62,7 @@ chrome.extension.sendMessage({}, function (response) {
                 el.style.display = 'flex';
                 el.style.alignItems = 'center';
                 el.style.textAlign = 'right';
-                el.style.padding = '3px';
+                el.style.padding = '3px 12px';
                 el.style.backgroundColor = 'rgb(0,193,222)';
                 el.style.color = '#EEEEEE';
                 el.style.position = 'fixed';
